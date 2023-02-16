@@ -8,23 +8,23 @@
     onFailedHandler: (payload: any) => {}
   }>()
 
-  let script: HTMLElement | null | undefined = null
+  let script: HTMLScriptElement | null | undefined = null
 
   const runtimeConfig = useRuntimeConfig()
 
   const dataKey = runtimeConfig.payjpDataKey
-  const className="payjp-button"
+  const className=""
 
   onMounted( () => {
     window.payjpCheckoutOnCreated = onCreateToken
     window.payjpCheckoutOnFailed = onCreateTokenFailed
     script = document.createElement('script')
-    script.setAttribute('src', 'https://checkout.pay.jp/')
-    script.setAttribute('data-on-created', 'payjpCheckoutOnCreated')
-    script.setAttribute('data-on-failed', 'payjpCheckoutOnFailed')
-    script.setAttribute('data-key', dataKey)
-    script.setAttribute('class', className)
-    script.setAttribute('data-partial', 'true')
+    script.src = 'https://checkout.pay.jp/'
+    script.dataset['onCreated'] = 'payjpCheckoutOnCreated'
+    script.dataset['onFailed'] = 'payjpCheckoutOnFailed'
+    script.dataset['key'] = dataKey
+    script.classList.add('payjp-button')
+    script.dataset['partial'] = 'true'
     document.querySelector('#payjp_dialog')?.appendChild(script)
   })
     onBeforeUnmount( () => {
