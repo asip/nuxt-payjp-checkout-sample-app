@@ -27,7 +27,8 @@
     script.dataset['partial'] = 'true'
     document.querySelector('#payjp_dialog')?.appendChild(script)
   })
-    onBeforeUnmount( () => {
+
+  onBeforeUnmount( () => {
     document.querySelector('#payjp_dialog')?.removeChild(script as Node)
     window.PayjpCheckout = null
     window.payjpCheckoutOnCreated = null
