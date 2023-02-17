@@ -4,16 +4,13 @@
 
 <script setup lang="ts">
   const props = defineProps<{
+    dataKey: string,
     onCreatedHandler: (payload: any) => {},
     onFailedHandler: (payload: any) => {}
   }>()
 
   let script: HTMLScriptElement | null | undefined = null
   let element: HTMLElement | null  = null
-
-  const runtimeConfig = useRuntimeConfig()
-
-  const dataKey = runtimeConfig.payjpDataKey
 
   onMounted( () => {
     window.payjpCheckoutOnCreated = onCreateToken
@@ -22,7 +19,7 @@
     script.src = 'https://checkout.pay.jp/'
     script.dataset['onCreated'] = 'payjpCheckoutOnCreated'
     script.dataset['onFailed'] = 'payjpCheckoutOnFailed'
-    script.dataset['key'] = dataKey
+    script.dataset['key'] = props.dataKey
     script.classList.add('payjp-button')
     script.dataset['partial'] = 'true'
     element = document.querySelector('#payjp_dialog')

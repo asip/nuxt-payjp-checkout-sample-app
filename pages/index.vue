@@ -1,8 +1,15 @@
 <template>
-  <PayjpCheckout :onCreatedHandler="onCreated" :onFailedHandler="onFailed" />
+  <PayjpCheckout
+    :dataKey="dataKey"
+    :onCreatedHandler="onCreated"
+    :onFailedHandler="onFailed" />
 </template>
 
 <script setup lang="ts">
+  const runtimeConfig = useRuntimeConfig()
+
+  const dataKey = runtimeConfig.payjpDataKey
+
   const onCreated = (payload: any) => {
     console.log(payload.token)
   }
