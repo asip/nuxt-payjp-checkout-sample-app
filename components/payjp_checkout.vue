@@ -5,6 +5,14 @@
 <script setup lang="ts">
   const props = defineProps<{
     dataKey: string,
+    dataPartial?: string,
+    dataText?: string,
+    dataSubmitText?: string,
+    dataTokenName?: string,
+    dataPreviousToken?: string,
+    dataLang?: string,
+    dataNamePlaceholder?: string,
+    dataTenant?: string,
     onCreatedHandler: (payload: any) => {},
     onFailedHandler: (payload: any) => {}
   }>()
@@ -20,8 +28,16 @@
     script.dataset['onCreated'] = 'payjpCheckoutOnCreated'
     script.dataset['onFailed'] = 'payjpCheckoutOnFailed'
     script.dataset['key'] = props.dataKey
+    props.dataPartial ? (script.dataset['partial'] = props.dataPartial) : (script.dataset['partial'] = 'true')
+    props.dataText && (script.dataset['text'] = props.dataText)
+    props.dataSubmitText && (script.dataset['submitText'] = props.dataSubmitText)
+    props.dataTokenName && (script.dataset['tokenName'] = props.dataTokenName)
+    props.dataPreviousToken && (script.dataset['previousToken'] = props.dataPreviousToken)
+    props.dataLang && (script.dataset['lang'] = props.dataLang)
+    props.dataNamePlaceholder && (script.dataset['namePlaceholder'] = props.dataNamePlaceholder)
+    props.dataTenant && (script.dataset['tenant'] = props.dataTenant)
     script.classList.add('payjp-button')
-    script.dataset['partial'] = 'true'
+
     element = document.querySelector('#payjp_dialog')
     element?.appendChild(script)
   })
