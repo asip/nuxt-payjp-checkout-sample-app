@@ -3,6 +3,12 @@
 </template>
 
 <script setup lang="ts">
+  interface Window {
+    payjpCheckoutOnCreated: ((response: any) => void) | null
+    payjpCheckoutOnFailed: ((statusCode: any, errorResponse: any) => void) | null
+  }
+  declare var window: Window
+
   const props = defineProps<{
     dataKey: string,
     dataPartial?: string,
@@ -44,7 +50,6 @@
 
   onBeforeUnmount( () => {
     element?.removeChild(script as Node)
-    window.PayjpCheckout = null
     window.payjpCheckoutOnCreated = null
     window.payjpCheckoutOnFailed = null
   })
