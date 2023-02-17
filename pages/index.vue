@@ -1,6 +1,7 @@
 <template>
   <PayjpCheckout
     :dataKey="dataKey"
+    dataPartial="true"
     :onCreatedHandler="onCreated"
     :onFailedHandler="onFailed" />
 </template>

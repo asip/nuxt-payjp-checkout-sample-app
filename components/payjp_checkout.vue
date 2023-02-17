@@ -28,7 +28,7 @@
     script.dataset['onCreated'] = 'payjpCheckoutOnCreated'
     script.dataset['onFailed'] = 'payjpCheckoutOnFailed'
     script.dataset['key'] = props.dataKey
-    props.dataPartial ? (script.dataset['partial'] = props.dataPartial) : (script.dataset['partial'] = 'true')
+    props.dataPartial ? (script.dataset['partial'] = props.dataPartial) : (script.dataset['partial'] = 'false')
     props.dataText && (script.dataset['text'] = props.dataText)
     props.dataSubmitText && (script.dataset['submitText'] = props.dataSubmitText)
     props.dataTokenName && (script.dataset['tokenName'] = props.dataTokenName)
