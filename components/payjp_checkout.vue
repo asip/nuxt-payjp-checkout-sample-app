@@ -9,11 +9,11 @@
   }>()
 
   let script: HTMLScriptElement | null | undefined = null
+  let element: HTMLElement | null  = null
 
   const runtimeConfig = useRuntimeConfig()
 
   const dataKey = runtimeConfig.payjpDataKey
-  const className=""
 
   onMounted( () => {
     window.payjpCheckoutOnCreated = onCreateToken
@@ -25,11 +25,12 @@
     script.dataset['key'] = dataKey
     script.classList.add('payjp-button')
     script.dataset['partial'] = 'true'
-    document.querySelector('#payjp_dialog')?.appendChild(script)
+    element = document.querySelector('#payjp_dialog')
+    element?.appendChild(script)
   })
 
   onBeforeUnmount( () => {
-    document.querySelector('#payjp_dialog')?.removeChild(script as Node)
+    element?.removeChild(script as Node)
     window.PayjpCheckout = null
     window.payjpCheckoutOnCreated = null
     window.payjpCheckoutOnFailed = null

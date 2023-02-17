@@ -7,5 +7,7 @@
     console.log(payload.token)
   }
 
-  const onFailed = (payload: any) => {}
+  const onFailed = (payload: any) => {
+    console.log(payload.message)
+  }
 </script>
