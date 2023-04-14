@@ -9,7 +9,7 @@
 <script setup lang="ts">
   const runtimeConfig = useRuntimeConfig()
 
-  const dataKey = runtimeConfig.payjpDataKey
+  const dataKey = runtimeConfig.public.payjpDataKey
 
   const onCreated = (payload: any) => {
     console.log(payload.token)
