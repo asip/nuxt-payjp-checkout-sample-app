@@ -7,6 +7,7 @@
     payjpCheckoutOnCreated: ((response: any) => void) | null
     payjpCheckoutOnFailed: ((statusCode: any, errorResponse: any) => void) | null
   }
+
   declare var window: Window
 
   const props = defineProps<{
