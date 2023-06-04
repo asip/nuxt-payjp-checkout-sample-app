@@ -6,6 +6,7 @@
   interface Window {
     payjpCheckoutOnCreated: ((response: any) => void) | null
     payjpCheckoutOnFailed: ((statusCode: any, errorResponse: any) => void) | null
+    PayjpCheckout: any | null
   }
 
   declare var window: Window
@@ -53,6 +54,7 @@
     element?.removeChild(script as Node)
     window.payjpCheckoutOnCreated = null
     window.payjpCheckoutOnFailed = null
+    window.PayjpCheckout = null
   })
 
   const onCreateToken = (response: any) => {
