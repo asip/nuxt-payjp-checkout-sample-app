@@ -21,8 +21,8 @@
     dataLang?: string,
     dataNamePlaceholder?: string,
     dataTenant?: string,
-    onCreatedHandler: (payload: any) => {},
-    onFailedHandler: (payload: any) => {}
+    onCreatedHandler: (payload: any) => void,
+    onFailedHandler: (payload: any) => void
   }>()
 
   let script: HTMLScriptElement | null | undefined = null
