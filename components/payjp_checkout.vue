@@ -3,6 +3,8 @@
 </template>
 
 <script setup lang="ts">
+  import { onMounted, onBeforeUnmount } from 'vue'
+
   interface Window {
     payjpCheckoutOnCreated: ((response: any) => void) | null
     payjpCheckoutOnFailed: ((statusCode: any, errorResponse: any) => void) | null
