@@ -5,14 +5,6 @@
 <script setup lang="ts">
   import { onMounted, onBeforeUnmount } from 'vue'
 
-  interface Window {
-    payjpCheckoutOnCreated: ((response: any) => void) | null
-    payjpCheckoutOnFailed: ((statusCode: any, errorResponse: any) => void) | null
-    PayjpCheckout: any | null
-  }
-
-  declare var window: Window
-
   interface CheckoutResponse {
     // card: any
     // created: number
@@ -28,6 +20,14 @@
     // status: number // http (response) status code
     // type: string
   }
+
+  interface Window {
+    payjpCheckoutOnCreated: ((response: CheckoutResponse) => void) | null
+    payjpCheckoutOnFailed: ((statusCode: number, errorResponse: CheckoutErrorResponse) => void) | null
+    PayjpCheckout: any | null
+  }
+
+  declare var window: Window
 
   interface PayjpCheckoutPayload {
     token: string
@@ -48,8 +48,8 @@
     dataLang?: string,
     dataNamePlaceholder?: string,
     dataTenant?: string,
-    onCreatedHandler: (payload: any) => void,
-    onFailedHandler: (payload: any) => void
+    onCreatedHandler: (payload: PayjpCheckoutPayload) => void,
+    onFailedHandler: (payload: PayjpCheckoutErrorPayload) => void
   }>()
 
   let script: HTMLScriptElement | null | undefined = null
