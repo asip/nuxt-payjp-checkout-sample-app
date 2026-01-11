@@ -1,8 +1,12 @@
 # PAY.JP Checkout Sample App with Nuxt 4
 
+<https://qiita.com/asip2k25/items/9687d19dad6481137785>
+
+## Getting started
+
 Look at the [Nuxt 4 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
-## Setup
+### Setup
 
 Make sure to install the dependencies:
 
@@ -17,29 +21,13 @@ yarn install
 npm install
 ```
 
-## Development Server
+### Development Server
 
 Start the development server on <http://localhost:3000>
 
 ```bash
 pnpm dev
 ```
-
-## Production
-
-Build the application for production:
-
-```bash
-pnpm build
-```
-
-Locally preview production build:
-
-```bash
-pnpm preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
 
 ## License
 
