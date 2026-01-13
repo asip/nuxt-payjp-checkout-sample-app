@@ -1,6 +1,4 @@
-<script setup lang="ts">
-  import { onMounted, onBeforeUnmount, useId } from 'vue'
-
+<script lang="ts">
   interface PayjpCheckoutResponse {
     // card: any
     // created: number
@@ -17,13 +15,6 @@
     // type: string
   }
 
-  interface PayjpWindow extends Window {
-    payjpCheckoutOnCreated: ((response: PayjpCheckoutResponse) => void) | null
-    payjpCheckoutOnFailed: ((statusCode: number, errorResponse: PayjpCheckoutErrorResponse) => void) | null
-    PayjpCheckout: unknown | null
-  }
-  declare const window: PayjpWindow
-
   export interface PayjpCheckoutPayload {
     token: string
   }
@@ -32,6 +23,18 @@
     statusCode: number
     message: string
   }
+
+  interface PayjpWindow extends Window {
+    payjpCheckoutOnCreated: ((response: PayjpCheckoutResponse) => void) | null
+    payjpCheckoutOnFailed: ((statusCode: number, errorResponse: PayjpCheckoutErrorResponse) => void) | null
+    PayjpCheckout: unknown | null
+  }
+
+  declare const window: PayjpWindow
+</script>
+
+<script setup lang="ts">
+  import { onMounted, onBeforeUnmount, useId } from 'vue'
 
   interface PayjpCheckoutProps {
     dataKey: string,
