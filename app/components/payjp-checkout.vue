@@ -1,7 +1,7 @@
 <script setup lang="ts">
-  import { onMounted, onBeforeUnmount } from 'vue'
+  import { onMounted, onBeforeUnmount, useId } from 'vue'
 
-  interface CheckoutResponse {
+  interface PayjpCheckoutResponse {
     // card: any
     // created: number
     id: string
@@ -10,7 +10,7 @@
     // used: boolean
   }
 
-  interface CheckoutErrorResponse {
+  interface PayjpCheckoutErrorResponse {
     // code: string
     message: string
     // status: number // http (response) status code
@@ -18,17 +18,17 @@
   }
 
   interface PayjpWindow extends Window {
-    payjpCheckoutOnCreated: ((response: CheckoutResponse) => void) | null
-    payjpCheckoutOnFailed: ((statusCode: number, errorResponse: CheckoutErrorResponse) => void) | null
-    PayjpCheckout: any | null
+    payjpCheckoutOnCreated: ((response: PayjpCheckoutResponse) => void) | null
+    payjpCheckoutOnFailed: ((statusCode: number, errorResponse: PayjpCheckoutErrorResponse) => void) | null
+    PayjpCheckout: unknown | null
   }
   declare const window: PayjpWindow
 
-  interface PayjpCheckoutPayload {
+  export interface PayjpCheckoutPayload {
     token: string
   }
 
-  interface PayjpCheckoutErrorPayload {
+  export interface PayjpCheckoutErrorPayload {
     statusCode: number
     message: string
   }
@@ -52,12 +52,14 @@
 
   const props = defineProps<PayjpCheckoutProps>()
 
-  const handleCheckoutCreated = (response: CheckoutResponse) => {
+  const payjpCheckoutId = useId()
+
+  const handleCheckoutCreated = (response: PayjpCheckoutResponse) => {
     const payload: PayjpCheckoutPayload = { token: response.id }
     props.onCreatedHandler(payload)
   }
 
-  const handleCheckoutFailed = (statusCode: number, errorResponse: CheckoutErrorResponse ) => {
+  const handleCheckoutFailed = (statusCode: number, errorResponse: PayjpCheckoutErrorResponse ) => {
     const payload: PayjpCheckoutErrorPayload = { statusCode, message: errorResponse.message }
     props.onFailedHandler(payload)
   }
@@ -65,6 +67,11 @@
   onMounted( () => {
     window.payjpCheckoutOnCreated = handleCheckoutCreated
     window.payjpCheckoutOnFailed = handleCheckoutFailed
+    /*
+    PAY.JP の checkout から呼ばれる window.alert を無効化
+    // カード情報が不正のときに window.alert が payjp の checkout から呼ばれるため
+    window.alert = () => {}
+    */
 
     script = document.createElement('script')
     script.src = 'https://checkout.pay.jp/'
@@ -81,7 +88,7 @@
     if (props.dataTenant) script.dataset['tenant'] = props.dataTenant
     script.classList.add('payjp-button')
 
-    element = document.querySelector('#payjp_dialog')
+    element = document.querySelector(`#${payjpCheckoutId}`)
     element?.appendChild(script)
   })
 
@@ -94,5 +101,5 @@
 </script>
 
 <template>
-  <div id="payjp_dialog"></div>
+  <div :id="payjpCheckoutId"></div>
 </template>
