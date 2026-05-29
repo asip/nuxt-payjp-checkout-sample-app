@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import type { PayjpCheckoutErrorPayload, PayjpCheckoutPayload } from '~/components/payjp-checkout.vue'
+import type { PayjpCheckoutErrorPayload, PayjpCheckoutPayload } from '~/types'
 
-  const runtimeConfig = useRuntimeConfig()
+const runtimeConfig = useRuntimeConfig()
 
-  const dataKey = runtimeConfig.public.payjpDataKey
+const dataKey = runtimeConfig.public.payjpDataKey
 
-  const onCreated = (payload: PayjpCheckoutPayload) => {
-    console.log(payload.token)
-  }
+const onCreated = (payload: PayjpCheckoutPayload) => {
+  console.log(payload.token)
+}
 
-  const onFailed = (payload: PayjpCheckoutErrorPayload) => {
-    console.log(payload.message)
-  }
+const onFailed = (payload: PayjpCheckoutErrorPayload) => {
+  console.log(payload.message)
+}
 </script>
 
 <template>

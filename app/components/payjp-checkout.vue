@@ -1,4 +1,6 @@
 <script lang="ts">
+  import type { PayjpCheckoutPayload, PayjpCheckoutErrorPayload } from '~/types'
+
   interface PayjpCheckoutResponse {
     // card: any
     // created: number
@@ -13,15 +15,6 @@
     message: string
     // status: number // http (response) status code
     // type: string
-  }
-
-  export interface PayjpCheckoutPayload {
-    token: string
-  }
-
-  export interface PayjpCheckoutErrorPayload {
-    statusCode: number
-    message: string
   }
 
   interface PayjpWindow extends Window {
